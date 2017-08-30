@@ -86,7 +86,25 @@ public class Dual_Laser_Serial implements SerialPortEventListener {
 	 * This should be called when you stop using the port.
 	 * This will prevent port locking on platforms like Linux.
 	 */
-	public synchronized int close() {
+	public synchronized int close() throws IOException {
+                laserOutput(0, true); //Turn off both lasers before disconnecting
+                try        
+                {
+                    Thread.sleep(100);
+                } 
+                catch(InterruptedException ex) 
+                {
+                    Thread.currentThread().interrupt();
+                }
+                laserOutput(0, false);
+                                try        
+                {
+                    Thread.sleep(100);
+                } 
+                catch(InterruptedException ex) 
+                {
+                    Thread.currentThread().interrupt();
+                }
 		if (serialPort != null) {
 			serialPort.removeEventListener();
 			serialPort.close();
