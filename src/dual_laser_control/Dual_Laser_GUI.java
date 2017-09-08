@@ -249,7 +249,11 @@ public class Dual_Laser_GUI extends javax.swing.JFrame {
 
     private void Retry_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Retry_ButtonActionPerformed
         if(connected == 2){
-            connected = laserSerial.close(); //Stop serial communication
+            try {
+                connected = laserSerial.close(); //Stop serial communication
+            } catch (IOException ex) {
+                Logger.getLogger(Dual_Laser_GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             statusString();
             Status_label.setText(status);
         }

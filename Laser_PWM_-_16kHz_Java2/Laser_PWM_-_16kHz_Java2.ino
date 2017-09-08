@@ -28,14 +28,6 @@ void setup() {
  
 void loop() {
   if(Serial.available() > 0){
-    delay(100);
-    nBytes = Serial.available();
-    for(a=0; a<nBytes; a++){
-      digitalWrite(13, HIGH);
-      delay(200);
-      digitalWrite(13, LOW);
-      delay(200);
-    }
     Serial.readBytes(inShort, 2);
     ArrayToInteger converter; //Create a converter
     converter.array[0] = inShort[0];
